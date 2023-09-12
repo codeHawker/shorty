@@ -21,8 +21,6 @@ export const db = getFirestore();
 export const addUrl = async (longUrl, shortUrl) => {
     const urlRef = doc(db, 'urls', shortUrl);
     const createdAt = new Date();
-
-
     try {
         console.log("test:", longUrl)
         await setDoc(urlRef, {longUrl, createdAt})
