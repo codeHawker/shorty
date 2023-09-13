@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
 import { getUrl } from "../../utils/firebase.utils";
 import { useEffect, useState } from "react";
+import "./redirect.styles.scss"
+import Spinner from "../../components/spinner/spinner.component";
 
 const Redirect = () => {
   const { shortUrl } = useParams();
-  const defaultContent = "...Redirecting";
+  const defaultContent = <div><p>. . . Redirecting</p> <Spinner/> </div>
   const [content, setContent] = useState(defaultContent);
 
   const checkPrefix = (url) => {
-    if((url.slice(0,8) == "https://") || (url.slice(0,7) == "http://") ){
+    if((url.slice(0,8) === "https://") || (url.slice(0,7) === "http://") ){
         return url
     }else{
         return "https://" + url
@@ -25,7 +27,7 @@ const Redirect = () => {
       });
   }, []);
 
-  return <div>{content}</div>;
+  return <div className="redirect-container">{content}</div>;
 };
 
 export default Redirect;

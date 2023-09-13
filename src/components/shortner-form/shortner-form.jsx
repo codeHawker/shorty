@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { randomUrl } from "../../utils/shortUrl.utils";
 import { addUrl } from "../../utils/firebase.utils";
+import "./shortner-form.styles.scss"
+import Spinner from "../spinner/spinner.component";
 
 const defaultFormFields = {
   longUrl: "",
@@ -31,8 +33,8 @@ const ShortnerForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="shortner-form-container">
+      <form className="shortner-form" onSubmit={handleSubmit}>
         <input
           label="longUrl"
           type="text"
@@ -46,16 +48,18 @@ const ShortnerForm = () => {
 
       {
       isLoading && (
-        <p>
-          Loading
-        </p>
+        <div className="loading-spinner">
+          <Spinner/>
+        </div>
       )}
 
       {
       shortUrl && (
-        <p>
-          Shortened URL: <a href={shortUrl}>{window.location.href}{shortUrl}</a>
-        </p>
+        <div className="shortened-url-container">
+          <p>
+            Shortened URL: <a href={shortUrl}>{window.location.href}{shortUrl}</a>
+          </p>
+        </div>
       )}
     </div>
   );
